@@ -2,13 +2,13 @@
 <html>
 <body>
 
-<h1>Login here</h1>
+<h1>Register now!</h1>
 
 <form method="POST" autocomplete="off">
  
     {% csrf_token %}
 
-    {{loginform.as_p}}
+    {{registerform.as_p}}
 
     <input type="submit" value="Register" />
 
