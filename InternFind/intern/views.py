@@ -1,9 +1,11 @@
+from django.forms import ValidationError
 from django.shortcuts import render, redirect
 from . models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from datetime import date
-
+from django.contrib import messages
+from django.utils.datastructures import MultiValueDictKeyError
 def index(request):
     return render(request, "index.html")
 
@@ -95,7 +97,7 @@ def all_applicants(request):
 
 def signup(request):
     if request.method=="POST":   
-        username = request.POST['email']
+        username = request.POST['username']
         first_name=request.POST['first_name']
         last_name=request.POST['last_name']
         password1 = request.POST['password1']
@@ -104,10 +106,17 @@ def signup(request):
         gender = request.POST['gender']
         image = request.FILES['image']
 
+        
+
         if password1 != password2:
             messages.error(request, "Passwords do not match.")
             return redirect('/signup')
-        
+        if 'username' in request.POST:
+            username = request.POST['username']
+        else:
+           messages.error(request, "Email not provided.")
+           return redirect('/signup')
+
         user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, password=password1)
         applicants = Applicant.objects.create(user=user, phone=phone, gender=gender, image=image, type="applicant")
         user.save()
@@ -115,28 +124,61 @@ def signup(request):
         return render(request, "user_login.html")
     return render(request, "signup.html")
 
-def company_signup(request):
-    if request.method=="POST":   
-        username = request.POST['username']
-        email = request.POST['email']
-        first_name=request.POST['first_name']
-        last_name=request.POST['last_name']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-        phone = request.POST['phone']
-        gender = request.POST['gender']
-        image = request.FILES['image']
-        company_name = request.POST['company_name']
+    
 
-        if password1 != password2:
-            messages.error(request, "Passwords do not match.")
-            return redirect('/signup')
-        
-        user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password1)
-        company = Company.objects.create(user=user, phone=phone, gender=gender, image=image, company_name=company_name, type="company", status="pending")
-        user.save()
-        company.save()
-        return render(request, "company_login.html")
+def company_signup(request):
+    if request.method == "POST":
+        try:
+            email = request.POST['email']
+            image = request.FILES['image']
+
+            if not email or not image:
+                raise ValidationError("Email or image not provided.")
+
+            username = request.POST['username']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            password1 = request.POST['password1']
+            password2 = request.POST['password2']
+            phone = request.POST['phone']
+            gender = request.POST['gender']
+            company_name = request.POST['company_name']
+
+            if password1 != password2:
+                messages.error(request, "Passwords do not match.")
+                return redirect('/company_signup')
+
+            user = User.objects.create_user(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                username=username,
+                password=password1
+            )
+            company = Company.objects.create(
+                user=user,
+                phone=phone,
+                gender=gender,
+                image=image,
+                company_name=company_name,
+                type="company",
+                status="pending"
+            )
+            user.save()
+            company.save()
+
+            return render(request, "company_login.html")
+
+        except MultiValueDictKeyError as e:
+            # Handle the exception, e.g., log the error, display an error message, etc.
+            messages.error(request, "Error: Email or image not provided.")
+            return redirect('/company_signup')
+
+        except ValidationError as e:
+            # Handle the exception, e.g., log the error, display an error message, etc.
+            messages.error(request, f"Validation Error: {e}")
+            return redirect('/company_signup')
+
     return render(request, "company_signup.html")
 
 def company_login(request):
