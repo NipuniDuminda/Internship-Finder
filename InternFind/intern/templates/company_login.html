@@ -5,6 +5,7 @@
 {% block css %}
 {% endblock %}
 {% block body %}
+
 <style>
     .form-group{
         margin-top: 20px;
@@ -114,8 +115,10 @@
 {% block js %}
 <script>
     {% if alert %}
-    alert("Invalid Credentials. Please try again.");
-    window.location.href = "/company_login"
+     alert("Invalid Credentials. Please try again.");
+     window.location.href = "{% url 'company_login' %}";
     {% endif %}
 </script>
+
+
 {% endblock %}

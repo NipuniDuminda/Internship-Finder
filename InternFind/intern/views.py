@@ -180,23 +180,38 @@ def company_signup(request):
             return redirect('/company_signup')
 
     return render(request, "company_signup.html")
+    
 
 def company_login(request):
     if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            user1 = Company.objects.get(user=user)
-            if user1.type == "company" and user1.status != "pending":
-                login(request, user)
-                return redirect("/company_homepage")
+            try:
+                company = Company.objects.get(user=user)
+                print(f"Company Status: {company.status}")
+                print(f"Company Type: {company.type}")
+                
+                if company.type == "company":
+                    login(request, user)
+                    messages.success(request, 'Login successful.')
+                    print(f"Redirecting to: {redirect('company_homepage')}")
+                    return redirect("company_homepage")
+                else:
+                    messages.error(request, 'Invalid Company Type.')
+            except Company.DoesNotExist:
+                messages.error(request, 'Company profile not found.')
         else:
-            alert = True
-            return render(request, "company_login.html", {"alert":alert})
+            messages.error(request, 'Invalid Credentials. Please try again.')
+
     return render(request, "company_login.html")
 
+def company_homepage(request):
+    print("Company homepage view accessed.")
+    # Your existing view logic here
+    return render(request, "company_homepage.html")
 def company_homepage(request):
     if not request.user.is_authenticated:
         return redirect("/company_login")
