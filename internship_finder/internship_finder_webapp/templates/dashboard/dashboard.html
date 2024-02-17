@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if request.user.is_student%}
+
+<section class="container">
+
+    <h1 class="text-center">Welcome to Internship Finder</h1>
+    <p class="text-center">Student Dashboard</p>
+
+
+</section>
+{% elif  request.user.is_recruiter%}
+<section class="container">
+
+    <h1 class="text-center">Welcome to Internship Finder</h1>
+    <p class="text-center">Recruiter Dashboard</p>
+   
+
+</section>
+{% endif %}
+    
+
+{% endblock content %}
