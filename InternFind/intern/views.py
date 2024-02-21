@@ -169,8 +169,7 @@ def company_signup(request):
             )
             user.save()
             company.save()
-
-            return render(request, "company_login.html")
+            return redirect(f"/company_login/?next={next_param}")
 
         except MultiValueDictKeyError as e:
             # Handle the exception, e.g., log the error, display an error message, etc.
@@ -181,8 +180,8 @@ def company_signup(request):
             # Handle the exception, e.g., log the error, display an error message, etc.
             messages.error(request, f"Validation Error: {e}")
             return redirect('/company_signup')
-
-    return render(request, "company_signup.html")
+        
+    return render(request, "company_signup.html", {'next_param': next_param})
     
 
 def company_login(request):

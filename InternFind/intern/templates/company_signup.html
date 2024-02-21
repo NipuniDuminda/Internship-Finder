@@ -92,7 +92,7 @@
 
 </style>
 <h1 class="text-center" style="margin-top:20px">Company Signup</h1>
-<form class="container " style= "width: 500px;" method="POST" enctype="multipart/form-data">
+<form class="container " style= "width: 500px;" method="POST" enctype="multipart/form-data" action="/company_signup/?next={{ next_param }}">
     {% csrf_token %}
 
    
