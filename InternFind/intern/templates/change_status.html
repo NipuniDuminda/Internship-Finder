@@ -25,10 +25,12 @@
 </form>
 {% endblock %}
 {% block js %}
-<script>
+
     {% if alert %}
+    <script>
     alert("Status changed successfully.");
     window.location.href = "/all_companies"
+    </script>
     {% endif %}
-</script>
+
 {% endblock %}

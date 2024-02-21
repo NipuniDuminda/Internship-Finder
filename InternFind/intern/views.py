@@ -1,3 +1,4 @@
+from audioop import reverse
 from django.forms import ValidationError
 from django.shortcuts import render, redirect
 from . models import *
@@ -34,7 +35,7 @@ def user_homepage(request):
     applicant = Applicant.objects.get(user=request.user)
     if request.method=="POST":   
         email = request.POST['email']
-        first_name=request.POST['first_name']
+        first_name=request.POST.get['first_name','']
         last_name=request.POST['last_name']
         phone = request.POST['phone']
         gender = request.POST['gender']
@@ -96,6 +97,7 @@ def all_applicants(request):
     return render(request, "all_applicants.html", {'application':application})
 
 def signup(request):
+    next_param = request.GET.get('next', '/')
     if request.method=="POST":   
         username = request.POST['username']
         first_name=request.POST['first_name']
@@ -121,12 +123,13 @@ def signup(request):
         applicants = Applicant.objects.create(user=user, phone=phone, gender=gender, image=image, type="applicant")
         user.save()
         applicants.save()
-        return render(request, "user_login.html")
-    return render(request, "signup.html")
+        return redirect(f"/user_login/?next={next_param}")
+    return render(request, "signup.html", {'next_param': next_param})
 
     
 
 def company_signup(request):
+    next_param = request.GET.get('next', '/')
     if request.method == "POST":
         try:
             email = request.POST['email']

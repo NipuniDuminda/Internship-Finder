@@ -31,11 +31,13 @@
 </form>
 {% endblock %}
 {% block js %}
-<script>
+
     {% if alert %}
+    <script>
     alert("Your company logo has been updated successfully.")
     window.location = "/job_list"
-    {% endif %}
 </script>
+    {% endif %}
+
 {% endblock %}
 

@@ -107,18 +107,20 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
         </div>
         <br>
-        <input type="submit" value="Submit" class="btn" style="background-color: #0000FF; color: white; font-size: larger; width: 8rem;  border-radius: 20px;">
+        <input type="submit" value="Submit" class="btn" style="background-color: #000;color: white; colofont-size: larger; width: 8rem;  border-radius: 20px;">
        
             <p class="text-muted" style="margin-top: 10px">Don't have an account? <a href="/signup/">Sign up</a></p>
-        </h6>
+    </h6>
     </div>
 </form>
 {% endblock %}
 {% block js %}
-<script>
+
     {% if thank %}
+    <script>
     alert("Invalid Credentials. Please try again.");
     window.location.href = "/user_login"
+   </script>
     {% endif %}
-</script>
+
 {% endblock %}

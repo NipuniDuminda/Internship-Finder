@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <input type="submit" value="Submit" class="btn mt-4" style="background-color: #4f868c; color: white; font-size: larger; width: 8rem;">
+                <input type="submit" value="Submit" class="btn mt-4" style="background-color: #000; color: white; font-size: larger; width: 8rem;">
             </form>
 
         </div>
@@ -99,11 +99,13 @@
 </div>
 {% endblock %}
 {% block js %}
-<script>
+
     {% if alert %}
+    <script>
     alert("Profile Updated Successfully")
     window.location = "/company_homepage"
-    {% endif %}
 </script>
+    {% endif %}
+
 {% endblock %}
 
