@@ -387,3 +387,6 @@ def delete_company(request, myid):
     company = User.objects.filter(id=myid)
     company.delete()
     return redirect("/all_companies")
+
+def our_team(request):
+    return render(request,"our_team.html")

@@ -32,4 +32,7 @@ urlpatterns = [
     path("all_companies/", views.all_companies, name="all_companies"),
     path("change_status/<int:myid>/", views.change_status, name="change_status"),
     path("delete_company/<int:myid>/", views.delete_company, name="delete_company"),
+
+
+    path("our_team/",views.our_team, name="our_team"),
 ]
