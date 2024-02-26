@@ -35,4 +35,5 @@ urlpatterns = [
 
 
     path("our_team/",views.our_team, name="our_team"),
+    path("contact_us/",views.contact_us, name="contact_us"),
 ]
