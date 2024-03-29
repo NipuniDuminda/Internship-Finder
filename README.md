@@ -56,6 +56,7 @@ SQLite3
 #### Develop a mobile application version for better accessibility on smartphones and tablets.
 
 ## 💫Contributors
+- [Ayisha Ilyas](https://github.com/AyishaIlyas)
 - [Nishadi Sasanthika](https://github.com/NishadiSS)
 
 ## 💫License
