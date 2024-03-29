@@ -49,4 +49,16 @@ SQLite3
 ![image](https://github.com/AyishaIlyas/InternshipFinder/assets/119886016/47523533-cf44-4652-bde9-577153437b46)
 ![image](https://github.com/AyishaIlyas/InternshipFinder/assets/119886016/87edd937-8822-4263-a659-3e7a1ce10a18)
 
+## 💫Future Enhancements
+#### Implement machine learning algorithms for better skill matching and recommendation systems.
+#### Integrate social media login/register functionality.
+#### Enhance analytics capabilities for deeper insights into user behavior and job market trends.
+#### Develop a mobile application version for better accessibility on smartphones and tablets.
+
+## 💫Contributors
+- [Nishadi Sasanthika](https://github.com/NishadiSS)
+
+## 💫License
+This project is licensed under the MIT License.
+
 
