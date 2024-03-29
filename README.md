@@ -58,6 +58,8 @@ SQLite3
 ## 💫Contributors
 - [Ayisha Ilyas](https://github.com/AyishaIlyas)
 - [Nishadi Sasanthika](https://github.com/NishadiSS)
+- [Sandun Srimal](https://github.com/sandunsrimal)
+- [Sachin Mihiranga](https://github.com/SachinMihiranga)
 
 ## 💫License
 This project is licensed under the MIT License.
