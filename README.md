@@ -4,6 +4,8 @@
 This project is an Online Job Portal built using Python Django framework. It facilitates job seekers to connect with companies by providing a platform where applicants can search for
 available jobs and apply according to their skill set. Similarly, companies can post job openings and review applicants' resumes to select suitable candidates.
 
+Our platform also includes features for seamless communication between job seekers and companies, facilitating interviews and correspondence throughout the hiring process. Additionally, robust analytics tools provide valuable insights for both job seekers and companies, aiding in decision-making and optimizing recruitment strategies.
+
 ## 💫Features
 ### Registration and Profile Creation: 
 Students and companies can register by providing basic information and create detailed profiles.
